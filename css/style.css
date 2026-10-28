@@ -365,3 +365,24 @@ h2 {
     border-radius: 10px;
     display: block;
 }
+@media (max-width: 600px) {
+    .topbar {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 12px 16px;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .search {
+        width: 100%;
+        max-width: 100%;
+        order: 3;
+    }
+
+    .header-right {
+        margin-left: auto;
+    }
+}
