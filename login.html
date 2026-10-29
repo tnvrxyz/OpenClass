@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Log In | OpenClass</title>
-
 <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
 
 <style>
@@ -19,8 +18,6 @@ body {
     color: white;
     font-family: Helvetica, Arial, sans-serif;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 
 header {
@@ -35,33 +32,32 @@ header {
     font-weight: bold;
 }
 
-main {
+.container {
     width: 90%;
     max-width: 420px;
-    margin: 80px auto;
+    margin: 65px auto;
 }
 
 h1 {
-    font-size: 29px;
+    font-size: 28px;
     margin-bottom: 10px;
 }
 
 .subtitle {
     color: #aaa;
-    margin-bottom: 32px;
+    margin-bottom: 30px;
     font-size: 14px;
 }
 
 label {
     display: block;
-    margin-bottom: 9px;
+    margin: 18px 0 8px;
     font-size: 14px;
 }
 
 input {
     width: 100%;
     padding: 14px;
-    margin-bottom: 22px;
     background: #181818;
     border: 1px solid #383838;
     border-radius: 7px;
@@ -69,9 +65,15 @@ input {
     font-size: 15px;
 }
 
+input:focus {
+    outline: none;
+    border-color: #888;
+}
+
 button {
     width: 100%;
     padding: 14px;
+    margin-top: 25px;
     background: white;
     color: black;
     border: none;
@@ -83,16 +85,17 @@ button {
 
 button:disabled {
     opacity: 0.5;
+    cursor: not-allowed;
 }
 
-#message {
-    margin-top: 20px;
-    color: #aaa;
+.message {
+    margin-top: 18px;
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.5;
+    color: #ccc;
 }
 
-.signup {
+.bottom {
     margin-top: 25px;
     color: #aaa;
     font-size: 14px;
@@ -102,27 +105,22 @@ button:disabled {
 a {
     color: white;
 }
-
-footer {
-    margin-top: auto;
-    padding: 25px;
-    text-align: center;
-    color: #666;
-    font-size: 12px;
-}
 </style>
 </head>
+
 <body>
 
 <header>
     <a href="index.html" class="logo">OpenClass</a>
 </header>
 
-<main>
+<main class="container">
+
     <h1>Welcome back</h1>
     <p class="subtitle">Log in to your OpenClass account.</p>
 
     <form id="login-form">
+
         <label for="email">Email address</label>
         <input
             type="email"
@@ -142,19 +140,17 @@ footer {
         <button type="submit" id="login-button">
             Log in
         </button>
+
     </form>
 
-    <p id="message"></p>
+    <p class="message" id="message"></p>
 
-    <p class="signup">
+    <p class="bottom">
         Don't have an account?
-        <a href="signup.html">Create one</a>
+        <a href="signup.html">Sign up</a>
     </p>
-</main>
 
-<footer>
-    OpenClass
-</footer>
+</main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase.js"></script>
@@ -167,23 +163,34 @@ const button = document.getElementById("login-button");
 form.addEventListener("submit", async function(event) {
     event.preventDefault();
 
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
     button.disabled = true;
     button.textContent = "Logging in...";
     message.textContent = "";
 
     try {
         const { data, error } =
-            await supabaseClient.auth.signInWithPassword({
-                email: document.getElementById("email").value.trim(),
-                password: document.getElementById("password").value
+            await window.supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: password
             });
 
-        if (error) throw error;
+        if (error) {
+            message.textContent = error.message;
+            return;
+        }
 
-        window.location.href = "dashboard.html";
+        message.textContent = "Login successful! Redirecting...";
+
+        setTimeout(function() {
+            window.location.href = "index.html";
+        }, 1000);
 
     } catch (error) {
         message.textContent = error.message;
+    } finally {
         button.disabled = false;
         button.textContent = "Log in";
     }
