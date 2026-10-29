@@ -1,9 +1,11 @@
- html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenClass</title>
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/jpeg" href="images/Fibonacci sequence_.jpg">
 </head>
@@ -11,16 +13,18 @@
 <body>
 
     <header class="topbar">
-    <a href="index.html" class="logo">OpenClass</a>
+        <a href="index.html" class="logo">OpenClass</a>
 
-    <input
-        type="search"
-        class="search"
-        placeholder="Search courses..."
-    >
+        <input
+            type="search"
+            class="search"
+            placeholder="Search courses..."
+        >
 
-    <div class="header-right">^w^</div>
-</header>
+        <div class="header-right" id="account-area">
+            <span class="account-loading">...</span>
+        </div>
+    </header>
 
     <main class="content">
 
@@ -30,46 +34,33 @@
 
         <section class="subject-grid">
 
-           <a href="physics.html" class="subject-card">
-                 <img
-                    class="subject-thumbnail"
-                    src="images/physics.jpg"
-                    alt="Physics"
-                 >
+            <a href="physics.html" class="subject-card">
+                <img class="subject-thumbnail" src="images/physics.jpg" alt="Physics">
                 <h2>Physics</h2>
             </a>
 
             <a href="chemistry.html" class="subject-card">
-                 <img
-                    class="subject-thumbnail"
-                    src="images/chem.jpg"
-                    alt="Chemistry"
-                 >
-             <h2>Chemistry</h2>
+                <img class="subject-thumbnail" src="images/chem.jpg" alt="Chemistry">
+                <h2>Chemistry</h2>
             </a>
 
             <a href="bio.html" class="subject-card">
-                 <img
-                    class="subject-thumbnail"
-                    src="images/bio.jpg"
-                    alt="Biology"
-                    >
+                <img class="subject-thumbnail" src="images/bio.jpg" alt="Biology">
                 <h2>Biology</h2>
-
             </a>
 
             <a href="hm.html" class="subject-card">
-                 <img
-                    class="subject-thumbnail"
-                    src="images/hm.jpg"
-                    alt="Higher Math"
-                    >
+                <img class="subject-thumbnail" src="images/hm.jpg" alt="Higher Math">
                 <h2>Higher Mathematics</h2>
             </a>
 
         </section>
 
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/account.js"></script>
 
 </body>
 </html>
