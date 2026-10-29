@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log In | OpenClass</title>
+
+<link rel="icon" type="image/jpeg" href="images/favicon.jpg">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #0f0f0f;
+    color: white;
+    font-family: Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    padding: 22px 5%;
+    border-bottom: 1px solid #272727;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+main {
+    width: 90%;
+    max-width: 420px;
+    margin: 80px auto;
+}
+
+h1 {
+    font-size: 29px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #aaa;
+    margin-bottom: 32px;
+    font-size: 14px;
+}
+
+label {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 22px;
+    background: #181818;
+    border: 1px solid #383838;
+    border-radius: 7px;
+    color: white;
+    font-size: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.5;
+}
+
+#message {
+    margin-top: 20px;
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.signup {
+    margin-top: 25px;
+    color: #aaa;
+    font-size: 14px;
+    text-align: center;
+}
+
+a {
+    color: white;
+}
+
+footer {
+    margin-top: auto;
+    padding: 25px;
+    text-align: center;
+    color: #666;
+    font-size: 12px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">OpenClass</a>
+</header>
+
+<main>
+    <h1>Welcome back</h1>
+    <p class="subtitle">Log in to your OpenClass account.</p>
+
+    <form id="login-form">
+        <label for="email">Email address</label>
+        <input
+            type="email"
+            id="email"
+            placeholder="you@example.com"
+            required
+        >
+
+        <label for="password">Password</label>
+        <input
+            type="password"
+            id="password"
+            placeholder="Your password"
+            required
+        >
+
+        <button type="submit" id="login-button">
+            Log in
+        </button>
+    </form>
+
+    <p id="message"></p>
+
+    <p class="signup">
+        Don't have an account?
+        <a href="signup.html">Create one</a>
+    </p>
+</main>
+
+<footer>
+    OpenClass
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+
+<script>
+const form = document.getElementById("login-form");
+const message = document.getElementById("message");
+const button = document.getElementById("login-button");
+
+form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    button.disabled = true;
+    button.textContent = "Logging in...";
+    message.textContent = "";
+
+    try {
+        const { data, error } =
+            await supabaseClient.auth.signInWithPassword({
+                email: document.getElementById("email").value.trim(),
+                password: document.getElementById("password").value
+            });
+
+        if (error) throw error;
+
+        window.location.href = "dashboard.html";
+
+    } catch (error) {
+        message.textContent = error.message;
+        button.disabled = false;
+        button.textContent = "Log in";
+    }
+});
+</script>
+
+</body>
+</html>
