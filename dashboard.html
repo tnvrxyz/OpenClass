@@ -2,145 +2,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Account | OpenClass</title>
-<link rel="icon" type="image/jpeg" href="images/favicon.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - OpenClass</title>
 
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+    <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
 
-body {
-    background: #0f0f0f;
-    color: white;
-    font-family: Helvetica, Arial, sans-serif;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-header {
-    height: 68px;
-    padding: 0 5%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #272727;
-}
+        body {
+            background: #0f0f0f;
+            color: #fff;
+            font-family: Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+        }
 
-.logo {
-    color: white;
-    text-decoration: none;
-    font-size: 24px;
-    font-weight: bold;
-}
+        header {
+            height: 68px;
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #272727;
+        }
 
-.home {
-    color: #aaa;
-    text-decoration: none;
-    font-size: 14px;
-}
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
 
-main {
-    width: 90%;
-    max-width: 850px;
-    margin: 50px auto;
-}
+        main {
+            width: 90%;
+            max-width: 650px;
+            margin: 55px auto;
+        }
 
-h1 {
-    font-size: 28px;
-    margin-bottom: 30px;
-}
+        h1 {
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
 
-.profile {
-    background: #181818;
-    border: 1px solid #303030;
-    border-radius: 12px;
-    padding: 28px;
-}
+        .profile {
+            background: #181818;
+            border: 1px solid #303030;
+            border-radius: 12px;
+            padding: 28px;
+        }
 
-.avatar {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    background: #303030;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 35px;
-    margin-bottom: 20px;
-}
+        .avatar-area {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            margin-bottom: 28px;
+        }
 
-#display-name {
-    font-size: 22px;
-    margin-bottom: 7px;
-}
+        #avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #303030;
+            object-fit: cover;
+            border: 1px solid #444;
+        }
 
-.email {
-    color: #999;
-    font-size: 14px;
-}
+        .avatar-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-label {
-    display: block;
-    margin: 25px 0 9px;
-    font-size: 14px;
-}
+        button, .upload-label {
+            background: #303030;
+            color: white;
+            border: 1px solid #454545;
+            padding: 10px 16px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 14px;
+        }
 
-input {
-    width: 100%;
-    padding: 13px;
-    background: #222;
-    border: 1px solid #444;
-    border-radius: 7px;
-    color: white;
-    font-size: 15px;
-}
+        button:hover, .upload-label:hover {
+            background: #414141;
+        }
 
-button {
-    padding: 12px 20px;
-    margin-top: 18px;
-    border: none;
-    border-radius: 7px;
-    cursor: pointer;
-    font-weight: bold;
-}
+        .remove-button {
+            color: #ff7777;
+        }
 
-.save {
-    background: white;
-    color: black;
-}
+        .field {
+            margin-bottom: 22px;
+        }
 
-.logout {
-    background: #292929;
-    color: white;
-    margin-top: 25px;
-}
+        label {
+            display: block;
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 9px;
+        }
 
-#message {
-    color: #aaa;
-    font-size: 14px;
-    margin-top: 15px;
-}
+        input[type="text"] {
+            width: 100%;
+            padding: 13px;
+            background: #0f0f0f;
+            border: 1px solid #383838;
+            border-radius: 7px;
+            color: white;
+            font-size: 15px;
+            outline: none;
+        }
 
-@media (max-width: 500px) {
-    main {
-        margin-top: 35px;
-    }
+        input[type="text"]:focus {
+            border-color: #777;
+        }
 
-    .profile {
-        padding: 20px;
-    }
-}
-</style>
+        .email {
+            color: #aaa;
+            font-size: 15px;
+        }
+
+        .save-button {
+            background: #fff;
+            color: #111;
+            border: none;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .save-button:hover {
+            background: #ddd;
+        }
+
+        .logout-button {
+            margin-top: 28px;
+            color: #ff7777;
+        }
+
+        #status {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 18px;
+            min-height: 18px;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        @media (max-width: 500px) {
+            main {
+                margin-top: 35px;
+            }
+
+            .profile {
+                padding: 20px;
+            }
+
+            .avatar-area {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <header>
     <a href="index.html" class="logo">OpenClass</a>
-    <a href="index.html" class="home">Home</a>
 </header>
 
 <main>
@@ -148,29 +183,54 @@ button {
 
     <section class="profile">
 
-        <div class="avatar">?</div>
+        <div class="avatar-area">
+            <img id="avatar" src="" alt="Profile picture">
 
-        <h2 id="display-name">Loading...</h2>
-        <p class="email" id="email"></p>
+            <div class="avatar-actions">
+                <label for="file-input" class="upload-label">
+                    Change picture
+                </label>
 
-        <label for="name">Display name</label>
+                <input
+                    type="file"
+                    id="file-input"
+                    accept="image/*"
+                >
 
-        <input
-            type="text"
-            id="name"
-            placeholder="Enter your display name"
-            maxlength="40"
-        >
+                <button
+                    type="button"
+                    class="remove-button"
+                    id="remove-avatar"
+                >
+                    Remove
+                </button>
+            </div>
+        </div>
 
-        <button class="save" id="save-button">
+        <div class="field">
+            <label for="display-name">Display name</label>
+            <input
+                type="text"
+                id="display-name"
+                placeholder="Enter your name"
+                maxlength="40"
+            >
+        </div>
+
+        <div class="field">
+            <label>Email address</label>
+            <p class="email" id="email">Loading...</p>
+        </div>
+
+        <button type="button" class="save-button" id="save-name">
             Save changes
         </button>
 
-        <p id="message"></p>
+        <p id="status"></p>
 
     </section>
 
-    <button class="logout" id="logout-button">
+    <button type="button" class="logout-button" id="logout">
         Log out
     </button>
 </main>
@@ -179,78 +239,232 @@ button {
 <script src="js/supabase.js"></script>
 
 <script>
-async function loadAccount() {
-    const { data, error } =
-        await window.supabaseClient.auth.getUser();
+    const supabase = window.supabaseClient;
 
-    if (error || !data.user) {
-        window.location.href = "login.html";
-        return;
+    const avatar = document.getElementById("avatar");
+    const fileInput = document.getElementById("file-input");
+    const displayName = document.getElementById("display-name");
+    const emailElement = document.getElementById("email");
+    const status = document.getElementById("status");
+
+    let currentUser = null;
+    let selectedFile = null;
+
+    function showStatus(message) {
+        status.textContent = message;
     }
 
-    const user = data.user;
-
-    const name =
-        user.user_metadata.display_name || "";
-
-    document.getElementById("email").textContent =
-        user.email;
-
-    document.getElementById("name").value = name;
-
-    document.getElementById("display-name").textContent =
-        name || "OpenClass user";
-}
-
-loadAccount();
-
-document.getElementById("save-button")
-.addEventListener("click", async function() {
-
-    const name = document.getElementById("name")
-        .value.trim();
-
-    const message = document.getElementById("message");
-
-    if (!name) {
-        message.textContent = "Please enter a display name.";
-        return;
+    function showAvatar(url) {
+        avatar.src = url || "";
+        avatar.style.visibility = url ? "visible" : "hidden";
     }
 
-    const { error } =
-        await window.supabaseClient.auth.updateUser({
+    async function loadProfile() {
+        const { data, error } = await supabase.auth.getUser();
+
+        if (error || !data.user) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        currentUser = data.user;
+
+        emailElement.textContent = currentUser.email || "";
+
+        displayName.value =
+            currentUser.user_metadata?.display_name || "";
+
+        showAvatar(currentUser.user_metadata?.avatar_url || "");
+    }
+
+    document.getElementById("save-name").addEventListener("click", async () => {
+        if (!currentUser) return;
+
+        const name = displayName.value.trim();
+
+        if (!name) {
+            showStatus("Please enter a display name.");
+            return;
+        }
+
+        showStatus("Saving...");
+
+        const { error } = await supabase.auth.updateUser({
             data: {
                 display_name: name
             }
         });
 
-    if (error) {
-        message.textContent = error.message;
-        return;
+        if (error) {
+            showStatus(error.message);
+            return;
+        }
+
+        showStatus("Display name saved.");
+    });
+
+    fileInput.addEventListener("change", () => {
+        const file = fileInput.files[0];
+
+        if (!file) return;
+
+        if (!file.type.startsWith("image/")) {
+            showStatus("Please select an image.");
+            fileInput.value = "";
+            return;
+        }
+
+        if (file.size > 8 * 1024 * 1024) {
+            showStatus("Image must be smaller than 8 MB.");
+            fileInput.value = "";
+            return;
+        }
+
+        selectedFile = file;
+
+        const previewURL = URL.createObjectURL(file);
+        showAvatar(previewURL);
+
+        showStatus("Preview ready. Uploading...");
+
+        uploadAvatar(file);
+    });
+
+    async function uploadAvatar(file) {
+        if (!currentUser) return;
+
+        showStatus("Preparing image...");
+
+        const image = new Image();
+        const previewURL = URL.createObjectURL(file);
+
+        image.onload = async () => {
+            try {
+                const canvas = document.createElement("canvas");
+
+                const maxSize = 512;
+                const scale = Math.min(
+                    1,
+                    maxSize / Math.max(image.width, image.height)
+                );
+
+                canvas.width = Math.round(image.width * scale);
+                canvas.height = Math.round(image.height * scale);
+
+                const context = canvas.getContext("2d");
+                context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+                const blob = await new Promise(resolve => {
+                    canvas.toBlob(resolve, "image/jpeg", 0.85);
+                });
+
+                URL.revokeObjectURL(previewURL);
+
+                if (!blob) {
+                    showStatus("Could not process this image.");
+                    return;
+                }
+
+                showStatus("Uploading picture...");
+
+                const path = `${currentUser.id}/avatar.jpg`;
+
+                const { error: uploadError } = await supabase
+                    .storage
+                    .from("avatars")
+                    .upload(path, blob, {
+                        contentType: "image/jpeg",
+                        upsert: true
+                    });
+
+                if (uploadError) {
+                    showStatus(uploadError.message);
+                    return;
+                }
+
+                const { data } = supabase
+                    .storage
+                    .from("avatars")
+                    .getPublicUrl(path);
+
+                const publicURL = data.publicUrl + "?t=" + Date.now();
+
+                const { error: updateError } = await supabase.auth.updateUser({
+                    data: {
+                        avatar_url: publicURL
+                    }
+                });
+
+                if (updateError) {
+                    showStatus(updateError.message);
+                    return;
+                }
+
+                showAvatar(publicURL);
+                showStatus("Profile picture updated.");
+
+            } catch (error) {
+                showStatus("Upload failed: " + error.message);
+            }
+        };
+
+        image.onerror = () => {
+            URL.revokeObjectURL(previewURL);
+            showStatus("Could not load this image.");
+        };
+
+        image.src = previewURL;
     }
 
-    document.getElementById("display-name")
-        .textContent = name;
+    document.getElementById("remove-avatar").addEventListener("click", async () => {
+        if (!currentUser) return;
 
-    message.textContent = "Profile updated successfully.";
-});
+        showStatus("Removing picture...");
 
-document.getElementById("logout-button")
-.addEventListener("click", async function() {
+        const path = `${currentUser.id}/avatar.jpg`;
 
-    const { error } =
-        await window.supabaseClient.auth.signOut();
+        const { error: removeError } = await supabase
+            .storage
+            .from("avatars")
+            .remove([path]);
 
-    if (error) {
-        document.getElementById("message").textContent =
-            error.message;
-        return;
-    }
+        if (removeError) {
+            showStatus(removeError.message);
+            return;
+        }
 
-    window.location.href = "login.html";
-});
+        const { error: updateError } = await supabase.auth.updateUser({
+            data: {
+                avatar_url: null
+            }
+        });
+
+        if (updateError) {
+            showStatus(updateError.message);
+            return;
+        }
+
+        showAvatar("");
+        fileInput.value = "";
+        selectedFile = null;
+
+        showStatus("Profile picture removed.");
+    });
+
+    document.getElementById("logout").addEventListener("click", async () => {
+        const { error } = await supabase.auth.signOut();
+
+        if (error) {
+            showStatus(error.message);
+            return;
+        }
+
+        window.location.href = "login.html";
+    });
+
+    showAvatar("");
+    loadProfile();
 </script>
 
 </body>
 </html>
-
