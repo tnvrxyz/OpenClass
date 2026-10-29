@@ -1,1 +1,256 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account | OpenClass</title>
+<link rel="icon" type="image/jpeg" href="images/favicon.jpg">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #0f0f0f;
+    color: white;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+header {
+    height: 68px;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #272727;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.home {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+main {
+    width: 90%;
+    max-width: 850px;
+    margin: 50px auto;
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.profile {
+    background: #181818;
+    border: 1px solid #303030;
+    border-radius: 12px;
+    padding: 28px;
+}
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #303030;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+#display-name {
+    font-size: 22px;
+    margin-bottom: 7px;
+}
+
+.email {
+    color: #999;
+    font-size: 14px;
+}
+
+label {
+    display: block;
+    margin: 25px 0 9px;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 7px;
+    color: white;
+    font-size: 15px;
+}
+
+button {
+    padding: 12px 20px;
+    margin-top: 18px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.save {
+    background: white;
+    color: black;
+}
+
+.logout {
+    background: #292929;
+    color: white;
+    margin-top: 25px;
+}
+
+#message {
+    color: #aaa;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+@media (max-width: 500px) {
+    main {
+        margin-top: 35px;
+    }
+
+    .profile {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html" class="logo">OpenClass</a>
+    <a href="index.html" class="home">Home</a>
+</header>
+
+<main>
+    <h1>My Account</h1>
+
+    <section class="profile">
+
+        <div class="avatar">?</div>
+
+        <h2 id="display-name">Loading...</h2>
+        <p class="email" id="email"></p>
+
+        <label for="name">Display name</label>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter your display name"
+            maxlength="40"
+        >
+
+        <button class="save" id="save-button">
+            Save changes
+        </button>
+
+        <p id="message"></p>
+
+    </section>
+
+    <button class="logout" id="logout-button">
+        Log out
+    </button>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+
+<script>
+async function loadAccount() {
+    const { data, error } =
+        await window.supabaseClient.auth.getUser();
+
+    if (error || !data.user) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    const user = data.user;
+
+    const name =
+        user.user_metadata.display_name || "";
+
+    document.getElementById("email").textContent =
+        user.email;
+
+    document.getElementById("name").value = name;
+
+    document.getElementById("display-name").textContent =
+        name || "OpenClass user";
+}
+
+loadAccount();
+
+document.getElementById("save-button")
+.addEventListener("click", async function() {
+
+    const name = document.getElementById("name")
+        .value.trim();
+
+    const message = document.getElementById("message");
+
+    if (!name) {
+        message.textContent = "Please enter a display name.";
+        return;
+    }
+
+    const { error } =
+        await window.supabaseClient.auth.updateUser({
+            data: {
+                display_name: name
+            }
+        });
+
+    if (error) {
+        message.textContent = error.message;
+        return;
+    }
+
+    document.getElementById("display-name")
+        .textContent = name;
+
+    message.textContent = "Profile updated successfully.";
+});
+
+document.getElementById("logout-button")
+.addEventListener("click", async function() {
+
+    const { error } =
+        await window.supabaseClient.auth.signOut();
+
+    if (error) {
+        document.getElementById("message").textContent =
+            error.message;
+        return;
+    }
+
+    window.location.href = "login.html";
+});
+</script>
+
+</body>
+</html>
+
