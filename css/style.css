@@ -386,3 +386,199 @@ h2 {
         margin-left: auto;
     }
 }
+
+/* ACCOUNT HEADER */
+
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    min-width: 110px;
+}
+
+.account-loading {
+    color: #999;
+    font-size: 13px;
+}
+
+.auth-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.auth-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.auth-links .signup-link {
+    background: #fff;
+    color: #111;
+    padding: 10px 17px;
+    border-radius: 7px;
+    font-weight: 600;
+}
+
+.auth-links .signup-link:hover {
+    background: #ddd;
+}
+
+.account-trigger {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 5px;
+}
+
+.account-avatar {
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #dedede;
+    border: 1px solid #555;
+}
+
+.account-username {
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.account-chevron {
+    color: #999;
+    font-size: 12px;
+}
+
+/* FLOATING ACCOUNT PANEL */
+
+.account-panel {
+    position: absolute;
+    top: calc(100% + 15px);
+    right: 0;
+    width: 320px;
+    max-width: calc(100vw - 24px);
+    background: #181818;
+    border: 1px solid #383838;
+    border-radius: 12px;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.account-panel.open {
+    display: block;
+}
+
+.account-panel-heading {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.account-panel-user {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #333;
+}
+
+.account-panel-avatar {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #dedede;
+}
+
+.account-panel-name {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.account-panel-email {
+    color: #999;
+    font-size: 12px;
+    margin-top: 5px;
+    overflow-wrap: anywhere;
+}
+
+.account-panel-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 13px;
+}
+
+.account-panel-links a,
+.account-panel-links button {
+    display: block;
+    width: 100%;
+    padding: 13px 10px;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: #eee;
+    text-decoration: none;
+    text-align: left;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.account-panel-links a:hover,
+.account-panel-links button:hover {
+    background: #303030;
+}
+
+.account-panel-links .logout-link {
+    color: #ff7777;
+}
+
+@media (max-width: 600px) {
+    .header-right {
+        min-width: auto;
+    }
+
+    .account-username,
+    .account-chevron {
+        display: none;
+    }
+
+    .account-avatar {
+        width: 39px;
+        height: 39px;
+    }
+
+    .account-panel {
+        right: -5px;
+    }
+
+    .auth-links {
+        gap: 10px;
+    }
+
+    .auth-links a {
+        font-size: 12px;
+    }
+
+    .auth-links .signup-link {
+        padding: 9px 11px;
+    }
+}
